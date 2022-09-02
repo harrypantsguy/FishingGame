@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class Fish : MonoBehaviour
+namespace FishingGame
 {
+    public class Fish : MonoBehaviour
+    {
     
+    }
 }
