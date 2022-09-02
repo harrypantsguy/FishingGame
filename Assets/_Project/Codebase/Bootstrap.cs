@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using FishingGame.ContentManagement;
+using FishingGame.FactoryPattern;
 using FishingGame.ModuleSystem;
 using FishingGame.ModuleSystem.Modules;
 using FishingGame.ServiceLayer;
@@ -16,9 +17,10 @@ namespace FishingGame
             Application.targetFrameRate = 60;
             
             ServiceLocator.Initialize();
+            FactoryLocator.Initialize();
             
             ServiceLocator.Bind<IContentService, DefaultContentService>(
-                new DefaultContentService(new DefaultContentManager()));
+                new DefaultContentService(new DefaultContentLoader()));
             ServiceLocator.Bind<IModuleService, DefaultModuleService>(
                 new DefaultModuleService(new DefaultModuleLoader()));
 
@@ -31,6 +33,7 @@ namespace FishingGame
         private void OnDestroy()
         {
             ServiceLocator.ClearBindings();
+            FactoryLocator.ClearBindings();
         }
     }
 }

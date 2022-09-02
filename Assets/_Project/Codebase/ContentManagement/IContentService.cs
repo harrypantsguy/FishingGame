@@ -2,6 +2,6 @@
 {
     public interface IContentService
     {
-        public IContentManager ContentManager { get; }
+        public IContentLoader ContentLoader { get; }
     }
 }

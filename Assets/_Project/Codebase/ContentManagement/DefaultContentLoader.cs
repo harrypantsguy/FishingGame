@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 
 namespace FishingGame.ContentManagement
 {
-    public sealed class DefaultContentManager : IContentManager
+    public sealed class DefaultContentLoader : IContentLoader
     {
         public int LoadIndex { get; private set; }
         public int LoadLength => _loadPhases.Count;

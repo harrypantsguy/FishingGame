@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FishingGame.ServiceLayer
+namespace FishingGame.DependencyInjection
 {
-    public sealed class ServiceContainer
+    public sealed class DependencyContainer
     {
         private readonly Dictionary<Type, object> _bindings = new Dictionary<Type, object>();
 

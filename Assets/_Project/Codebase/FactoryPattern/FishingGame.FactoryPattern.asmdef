@@ -1,7 +1,9 @@
 {
-    "name": "FishingGame.Factories",
+    "name": "FishingGame.FactoryPattern",
     "rootNamespace": "FishingGame",
-    "references": [],
+    "references": [
+        "GUID:9989893e4d8868f46b0d57a134d39d00"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
