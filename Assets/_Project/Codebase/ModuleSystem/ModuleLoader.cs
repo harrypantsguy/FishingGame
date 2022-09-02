@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 
 namespace FishingGame.ModuleSystem
 {
-    public sealed class DefaultModuleLoader
+    public sealed class ModuleLoader
     {
         private readonly Dictionary<Type, IModule> _loadedModules = new Dictionary<Type, IModule>();
 
