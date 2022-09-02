@@ -1,6 +1,8 @@
-﻿using Svelto.Context;
+﻿using FishingGame.ECS.CompositionRoots;
+using Svelto.Context;
 
 namespace FishingGame
 {
-    public sealed class BootstrapContext : UnityContext<CompositionRoot> { }
+    // Look at generic parameter to see composition implementation
+    public sealed class BootstrapContext : UnityContext<EntryPointCompositionRoot> { }
 }

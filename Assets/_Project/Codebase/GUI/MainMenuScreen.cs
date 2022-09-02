@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using FishingGame.ModuleSystem;
+using FishingGame.ModuleSystem.Modules;
+using FishingGame.ServiceLayer;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace FishingGame.GUI
@@ -9,12 +13,15 @@ namespace FishingGame.GUI
 
         private void Start()
         {
-            _playButton.onClick.AddListener(OnPlayButtonClicked);
+            _playButton.onClick.AddListener(() => OnPlayButtonClicked());
         }
 
-        private void OnPlayButtonClicked()
+        private async UniTaskVoid OnPlayButtonClicked()
         {
-            
+            var moduleLoader = ServiceLocator.Retrieve<IModuleService>().ModuleLoader;
+
+            await moduleLoader.UnloadModuleAsync<MainMenuModule>();
+            await moduleLoader.LoadModuleAsync<GameModule>();
         }
     }
 }

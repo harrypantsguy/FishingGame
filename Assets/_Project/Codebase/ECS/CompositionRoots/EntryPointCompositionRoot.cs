@@ -1,4 +1,5 @@
-﻿using FishingGame.ContentManagement;
+﻿using Cysharp.Threading.Tasks;
+using FishingGame.ContentManagement;
 using FishingGame.FactoryPattern;
 using FishingGame.ModuleSystem;
 using FishingGame.ModuleSystem.Modules;
@@ -6,15 +7,16 @@ using FishingGame.ServiceLayer;
 using Svelto.Context;
 using UnityEngine;
 
-namespace FishingGame
+namespace FishingGame.ECS.CompositionRoots
 {
-    public sealed class CompositionRoot : ICompositionRoot
+    public sealed class EntryPointCompositionRoot : ICompositionRoot
     {
         public void OnContextCreated<T>(T contextHolder)
         {
+            
         }
 
-        public async void OnContextInitialized<T>(T contextHolder)
+        public void OnContextInitialized<T>(T contextHolder)
         {
             Application.targetFrameRate = 60;
             
@@ -28,7 +30,7 @@ namespace FishingGame
 
             var moduleLoader = ServiceLocator.Retrieve<IModuleService>().ModuleLoader;
             
-            await moduleLoader.LoadModuleAsync<MainMenuModule>();
+            moduleLoader.LoadModuleAsync<MainMenuModule>().Forget();
         }
 
         public void OnContextDestroyed(bool hasBeenInitialised)
