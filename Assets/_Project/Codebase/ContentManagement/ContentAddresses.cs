@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using FishingGame.AsyncLoading;
 
 namespace FishingGame.ContentManagement
 {
@@ -16,9 +15,7 @@ namespace FishingGame.ContentManagement
             
             public static class GUI
             {
-                public const string CONTENT_LOAD_SCREEN_CANVAS = _PREFABS + _GUI + "ContentLoadScreenCanvas";
                 public const string MAIN_MENU_CANVAS = _PREFABS + _GUI + "MainMenuCanvas";
-                public const string POPUP_CANVAS = _PREFABS + _GUI + "PopupCanvas";
             }
         }
         

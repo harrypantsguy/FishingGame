@@ -1,5 +1,5 @@
 {
-    "name": "FishingGame.ServiceSystem",
+    "name": "FishingGame.Factories",
     "rootNamespace": "FishingGame",
     "references": [],
     "includePlatforms": [],
