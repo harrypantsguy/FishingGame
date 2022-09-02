@@ -11,6 +11,8 @@ namespace FishingGame.Development
         public static readonly KeyBind Left = new KeyBind(KeyCode.A);
         public static readonly KeyBind Right = new KeyBind(KeyCode.D);
         public static readonly KeyBind CastLine = new KeyBind(KeyCode.Mouse0);
+        public static readonly KeyBind ReelOut = new KeyBind(KeyCode.W);
+        public static readonly KeyBind ReelIn = new KeyBind(KeyCode.S);
         public static float MouseYInput => Input.GetAxisRaw("Mouse Y");
         public static float MouseXInput => Input.GetAxisRaw("Mouse X");
         public static Vector2 MouseInput => new Vector2(MouseXInput, MouseYInput);

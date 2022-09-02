@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace FishingGame.Development
@@ -7,25 +8,40 @@ namespace FishingGame.Development
     {
         public Character playerController;
         [SerializeField] private Image _castStrengthImage;
-        [SerializeField] private Bobber _bobber;
+        [SerializeField] private FishingRod _rod;
         private float castStrength;
         private float _castStartTime;
         private const float PERFECT_CAST_TIME = 1.25f;
         private const float PERFECT_CAST_CUSHION = .01f;
-        private bool _overshotCast = false;
+        private const float CAST_STRENGTH_MULTIPLIER = 10f;
+        private CameraController _camera;
+        private bool _overshotCast;
+        private bool _casting;
         
+        private void Start()
+        {
+            _camera = CameraController.Singleton;
+            _camera.SetTargetTransform(playerController.transform);
+            _camera.transform.position = playerController.transform.position;
+            
+            Application.targetFrameRate = 60;
+        }
+
         private void Update()
         {
             if (playerController != null)
             {
-                playerController.moveInput = GameControls.DirectionalInput;
+                playerController.moveInput = _casting ? Vector2.zero : GameControls.DirectionalInput;
             }
 
             if (GameControls.CastLine.IsPressed)
             {
+                _casting = true;
+                
                 _castStartTime = Time.time;
                 castStrength = 0f;
                 _overshotCast = false;
+                _camera.SetTargetTransform(playerController.transform);
             }
             else if (GameControls.CastLine.IsHeld)
             {
@@ -50,9 +66,10 @@ namespace FishingGame.Development
                     Debug.Log("perfect cast!");
                 }
 
-                float strength = Mathf.Max(castStrength * 8f * (isPerfectCast ? 1.25f : 1f), .707f);
+                float strength = Mathf.Max(castStrength * CAST_STRENGTH_MULTIPLIER * (isPerfectCast ? 1.25f : 1f), .707f);
                 Vector2 throwVector = new Vector2(playerController.FlipValue * strength, 5f);
-                _bobber.ThrowBobber(playerController.transform.position + new Vector3(0f, 1.5f), throwVector);
+                _rod.ThrowLure(playerController.transform.position + new Vector3(0f, 1.5f), throwVector);
+                _camera.SetTargetTransform(_rod.Lure.transform);
             }
 
             if (_castStrengthImage != null)

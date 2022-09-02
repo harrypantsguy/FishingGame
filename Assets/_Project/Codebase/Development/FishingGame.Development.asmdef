@@ -1,7 +1,9 @@
 {
     "name": "FishingGame.Development",
     "rootNamespace": "FishingGame",
-    "references": [],
+    "references": [
+        "GUID:10a1bc50f71a6d845b3589811e95db6c"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

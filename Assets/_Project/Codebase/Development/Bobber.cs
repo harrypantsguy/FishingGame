@@ -1,33 +1,44 @@
-﻿using UnityEngine;
+﻿using FishingGame.Utilities;
+using UnityEngine;
 
 namespace FishingGame.Development
 {
     public class Bobber : MonoBehaviour
     {
-        private Rigidbody2D _rb;
+        public Rigidbody2D RB { get; private set; }
+        public CircleCollider2D Collider { get; private set; }
 
         private void Start()
         {
-            _rb = GetComponent<Rigidbody2D>();
-            _rb.simulated = false;
+            RB = GetComponent<Rigidbody2D>();
+            Collider = GetComponent<CircleCollider2D>();
         }
 
         private void FixedUpdate()
         {
-            //_rb.velocity = _rb.velocity.SetY(_rb.velocity.y - Time.fixedDeltaTime * 5f);
-        }
+            bool underwater = RB.position.y < 0f;
 
-        public void ThrowBobber(Vector2 start, Vector2 velocity)
-        {
-            _rb.simulated = true;
-            _rb.position = start;
-            _rb.velocity = velocity;
+            RB.drag = underwater ? 8f : 0f;
+            //RB.angularDrag = underwater ? 1f : .05f;
+
+            if (underwater)
+            {
+                float waterDensity = 200f;
+                float force = RB.position.y.ClampedRemap(-Collider.radius, 0f,
+                    Collider.radius * waterDensity, 0f);
+                RB.velocity += new Vector2(0f, force * Time.fixedDeltaTime);
+                
+                transform.eulerAngles = transform.eulerAngles.SetZ(Mathf.LerpAngle(transform.eulerAngles.z,
+                    0f, 10f * Time.deltaTime));
+            }
+
+            //RB.velocity = RB.velocity.SetY(RB.velocity.y - Time.fixedDeltaTime * 5f);
         }
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            //_rb.simulated = false;
-            Debug.Log($"bobber hit, {Mathf.Abs(_rb.position.x - Player.Singleton.playerController.transform.position.x)}");
+            //RB.simulated = false;
+            Debug.Log($"bobber hit, {Mathf.Abs(RB.position.x - Player.Singleton.playerController.transform.position.x)}");
         }
     }
 }
