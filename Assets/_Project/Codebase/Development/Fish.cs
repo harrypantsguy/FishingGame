@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FishingGame
+namespace FishingGame.Development
 {
     public class Fish : MonoBehaviour
     {
