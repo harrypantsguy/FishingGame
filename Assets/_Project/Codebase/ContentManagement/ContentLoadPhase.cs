@@ -48,7 +48,7 @@ namespace FishingGame.ContentManagement
                 {
                     CurrentlyLoadingAddressable = addressable;
                     await addressable.LoadAsync();
-                    writer.YieldAsync(addressable);
+                    await writer.YieldAsync(addressable);
                     LoadIndex++;
                 }
             });
