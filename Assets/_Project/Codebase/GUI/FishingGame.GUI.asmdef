@@ -1,12 +1,13 @@
 {
-    "name": "FishingGame.ModuleSystem",
+    "name": "FishingGame.GUI",
     "rootNamespace": "FishingGame",
     "references": [
-        "GUID:fd98a591c4a1f0c468accb69b7ab71b2",
-        "GUID:17f419a7297da1840aa83600bf58863f",
-        "GUID:6ebf22e5e32d9a04690ea44d6e17e09b",
-        "GUID:10a1bc50f71a6d845b3589811e95db6c",
-        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:9ea406e4b6b6c734f8aa215d5e92c548",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:5c01796d064528144a599661eaab93a6",
+        "GUID:dc47925d1a5fa2946bdd37746b2b5d48",
+        "GUID:029c1c1b674aaae47a6841a0b89ad80e"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

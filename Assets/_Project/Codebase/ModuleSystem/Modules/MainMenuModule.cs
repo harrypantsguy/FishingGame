@@ -1,22 +1,35 @@
 ﻿using Cysharp.Threading.Tasks;
+using FishingGame.ContentManagement;
+using FishingGame.ServiceLayer;
+using FishingGame.Utilities;
+using UnityEngine;
 
 namespace FishingGame.ModuleSystem.Modules
 {
     public sealed class MainMenuModule : IModule
     {
-        public UniTask LoadAsync()
+        private const string _MAIN_MENU = "MainMenu";
+        private const string _MAIN_MENU_CANVAS_ADDRESS = ContentAddresses.Prefabs.GUI.MAIN_MENU_CANVAS;
+        
+        public async UniTask LoadAsync()
         {
-            return default;
+            SceneUtils.CreateScene(_MAIN_MENU);
+
+            await SceneUtils.SetActiveScene(_MAIN_MENU);
+
+            var contentManager = ServiceLocator.Retrieve<IContentService>().ContentManager;
+            var mainMenuCanvasPrefab = await contentManager.LoadContent<GameObject>(_MAIN_MENU_CANVAS_ADDRESS);
+            var mainMenuCanvasObj = Object.Instantiate(mainMenuCanvasPrefab);
         }
 
-        public UniTask UnloadAsync()
+        public async UniTask UnloadAsync()
         {
-            return default;
+            await SceneUtils.UnloadSceneAsync(_MAIN_MENU);
         }
 
-        public UniTask SetModuleActiveAsync()
+        public async UniTask SetModuleActiveAsync()
         {
-            return default;
+            await SceneUtils.SetActiveScene(_MAIN_MENU);
         }
     }
 }
