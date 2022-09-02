@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace FishingGame
+namespace FishingGame.Development
 {
     public class Player : MonoSingleton<Player>
     {

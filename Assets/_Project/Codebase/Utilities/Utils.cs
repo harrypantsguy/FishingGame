@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace FishingGame
+namespace FishingGame.Utilities
 {
     public static class Utils
     {

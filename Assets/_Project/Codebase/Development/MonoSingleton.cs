@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FishingGame
+namespace FishingGame.Development
 {
     public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
     {
