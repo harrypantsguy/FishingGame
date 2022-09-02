@@ -1,18 +1,20 @@
-﻿using Cysharp.Threading.Tasks;
-using FishingGame.ContentManagement;
+﻿using FishingGame.ContentManagement;
 using FishingGame.FactoryPattern;
 using FishingGame.ModuleSystem;
 using FishingGame.ModuleSystem.Modules;
 using FishingGame.ServiceLayer;
-using JetBrains.Annotations;
+using Svelto.Context;
 using UnityEngine;
 
 namespace FishingGame
 {
-    public sealed class Bootstrap : MonoBehaviour
+    public sealed class CompositionRoot : ICompositionRoot
     {
-        [UsedImplicitly]
-        private async UniTaskVoid Start()
+        public void OnContextCreated<T>(T contextHolder)
+        {
+        }
+
+        public async void OnContextInitialized<T>(T contextHolder)
         {
             Application.targetFrameRate = 60;
             
@@ -29,8 +31,7 @@ namespace FishingGame
             await moduleLoader.LoadModuleAsync<MainMenuModule>();
         }
 
-        [UsedImplicitly]
-        private void OnDestroy()
+        public void OnContextDestroyed(bool hasBeenInitialised)
         {
             ServiceLocator.ClearBindings();
             FactoryLocator.ClearBindings();

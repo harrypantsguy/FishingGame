@@ -1,15 +1,9 @@
 {
-    "name": "FishingGame",
+    "name": "FishingGame.ECS",
     "rootNamespace": "FishingGame",
     "references": [
-        "GUID:6ebf22e5e32d9a04690ea44d6e17e09b",
-        "GUID:7c3fd0ff00184a14a97faa858b7f87b6",
-        "GUID:17f419a7297da1840aa83600bf58863f",
-        "GUID:7b53086a707337249998a65d34370e17",
-        "GUID:fd98a591c4a1f0c468accb69b7ab71b2",
         "GUID:0c3d971be5ab3c929b4ddcd28867102d",
-        "GUID:12b54cc0583e3ccba858b8655d12ebf4",
-        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+        "GUID:12b54cc0583e3ccba858b8655d12ebf4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
