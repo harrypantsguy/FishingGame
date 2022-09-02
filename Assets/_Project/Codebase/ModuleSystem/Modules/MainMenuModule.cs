@@ -17,8 +17,14 @@ namespace FishingGame.ModuleSystem.Modules
 
             await SceneUtils.SetActiveScene(_MAIN_MENU);
 
-            var contentManager = ServiceLocator.Retrieve<IContentService>().ContentLoader;
-            var mainMenuCanvasPrefab = await contentManager.LoadContent<GameObject>(_MAIN_MENU_CANVAS_ADDRESS);
+            var contentLoader = ServiceLocator.Retrieve<IContentService>().ContentLoader;
+
+            contentLoader.EnqueueLoadable(new ContentLoadPhase("GUI", 
+                ContentAddresses.GetAssetAddressesInType(typeof(ContentAddresses.Prefabs.GUI)).ToAddressables()));
+
+            await contentLoader.ProcessQueue();
+            
+            var mainMenuCanvasPrefab = contentLoader.GetCachedContent<GameObject>(_MAIN_MENU_CANVAS_ADDRESS);
             var mainMenuCanvasObj = Object.Instantiate(mainMenuCanvasPrefab);
         }
 

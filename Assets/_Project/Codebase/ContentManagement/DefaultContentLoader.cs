@@ -27,6 +27,20 @@ namespace FishingGame.ContentManagement
                 _loadPhases.Enqueue(loadable);
         }
 
+        public async UniTask ProcessQueue()
+        {
+            LoadIndex = 0;
+            foreach (var loadPhase in _loadPhases)
+            {
+                await foreach (var addressable in loadPhase.ProcessQueueEnumerable())
+                {
+                    await addressable.LoadAsync();
+                    _cachedContent.TryAdd(addressable.Address, addressable.LoadedObject);
+                }
+                LoadIndex++;
+            }
+        }
+
         public IUniTaskAsyncEnumerable<ContentLoadPhase> ProcessQueueEnumerable()
         {
             return UniTaskAsyncEnumerable.Create<ContentLoadPhase>(async (writer, token) =>
