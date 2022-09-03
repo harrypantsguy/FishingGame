@@ -39,6 +39,17 @@ namespace FishingGame.ContentManagement
                 _addressableQueue.Enqueue(loadable);
         }
 
+        public async UniTask ProcessQueue()
+        {
+            LoadIndex = 0;
+            foreach (var addressable in _addressableQueue)
+            {
+                CurrentlyLoadingAddressable = addressable;
+                await addressable.LoadAsync();
+                LoadIndex++;
+            }
+        }
+
         public IUniTaskAsyncEnumerable<Addressable> ProcessQueueEnumerable()
         {
             return UniTaskAsyncEnumerable.Create<Addressable>(async (writer, token) =>
@@ -48,7 +59,7 @@ namespace FishingGame.ContentManagement
                 {
                     CurrentlyLoadingAddressable = addressable;
                     await addressable.LoadAsync();
-                    writer.YieldAsync(addressable);
+                    await writer.YieldAsync(addressable);
                     LoadIndex++;
                 }
             });

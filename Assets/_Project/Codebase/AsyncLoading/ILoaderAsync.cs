@@ -10,6 +10,7 @@ namespace FishingGame.AsyncLoading
         public IEnumerable<T> LoadQueue { get; }
         public void EnqueueLoadable(in T loadable);
         public void EnqueueLoadables(in IEnumerable<T> loadables);
+        public UniTask ProcessQueue();
         public IUniTaskAsyncEnumerable<T> ProcessQueueEnumerable();
     }
 }

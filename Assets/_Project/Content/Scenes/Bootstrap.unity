@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 674414328}
   - component: {fileID: 674414329}
   m_Layer: 0
-  m_Name: Bootstrap
+  m_Name: BootstrapContext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 674414327}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5ded19130204a3990a6fd81176c2fa2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5caca28769d04c5ebd1c977662efc6bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1165677182

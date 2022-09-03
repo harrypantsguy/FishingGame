@@ -1,8 +1,8 @@
 ﻿using FishingGame.DependencyInjection;
 
-namespace FishingGame.ServiceLayer
+namespace FishingGame.FactoryPattern
 {
-    public static class ServiceLocator
+    public static class FactoryLocator
     {
         private static DependencyContainer _container;
 
@@ -10,7 +10,7 @@ namespace FishingGame.ServiceLayer
 
         public static void Bind<I, T>(in T implementation) where T : I => _container.Bind<I, T>(implementation);
 
-        public static T Retrieve<T>() => _container.Resolve<T>();
+        public static void Retrieve<I>() => _container.Resolve<I>();
 
         public static void ClearBindings() => _container.ClearBindings();
     }

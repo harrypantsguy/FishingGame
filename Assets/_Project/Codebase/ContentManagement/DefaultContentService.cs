@@ -2,11 +2,11 @@
 {
     public sealed class DefaultContentService : IContentService
     {
-        public IContentManager ContentManager { get; }
+        public IContentLoader ContentLoader { get; }
 
-        public DefaultContentService(in IContentManager contentManager)
+        public DefaultContentService(in IContentLoader contentLoader)
         {
-            ContentManager = contentManager;
+            ContentLoader = contentLoader;
         }
     }
 }

@@ -1,9 +1,7 @@
 {
-    "name": "FishingGame.ServiceLayer",
+    "name": "FishingGame.DependencyInjection",
     "rootNamespace": "FishingGame",
-    "references": [
-        "GUID:9989893e4d8868f46b0d57a134d39d00"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

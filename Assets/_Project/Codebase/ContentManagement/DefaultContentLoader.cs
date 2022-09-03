@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 
 namespace FishingGame.ContentManagement
 {
-    public sealed class DefaultContentManager : IContentManager
+    public sealed class DefaultContentLoader : IContentLoader
     {
         public int LoadIndex { get; private set; }
         public int LoadLength => _loadPhases.Count;
@@ -25,6 +25,20 @@ namespace FishingGame.ContentManagement
         {
             foreach (var loadable in loadables)
                 _loadPhases.Enqueue(loadable);
+        }
+
+        public async UniTask ProcessQueue()
+        {
+            LoadIndex = 0;
+            foreach (var loadPhase in _loadPhases)
+            {
+                await foreach (var addressable in loadPhase.ProcessQueueEnumerable())
+                {
+                    await addressable.LoadAsync();
+                    _cachedContent.TryAdd(addressable.Address, addressable.LoadedObject);
+                }
+                LoadIndex++;
+            }
         }
 
         public IUniTaskAsyncEnumerable<ContentLoadPhase> ProcessQueueEnumerable()
