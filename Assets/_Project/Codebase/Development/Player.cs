@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace FishingGame.Development
@@ -13,7 +12,7 @@ namespace FishingGame.Development
         private float _castStartTime;
         private const float PERFECT_CAST_TIME = 1.25f;
         private const float PERFECT_CAST_CUSHION = .01f;
-        private const float CAST_STRENGTH_MULTIPLIER = 10f;
+        private const float CAST_STRENGTH_MULTIPLIER = 25f;
         private CameraController _camera;
         private bool _overshotCast;
         private bool _casting;
@@ -21,7 +20,7 @@ namespace FishingGame.Development
         private void Start()
         {
             _camera = CameraController.Singleton;
-            _camera.SetTargetTransform(playerController.transform);
+            _camera.target = playerController.transform;
             _camera.transform.position = playerController.transform.position;
             
             Application.targetFrameRate = 60;
@@ -31,17 +30,20 @@ namespace FishingGame.Development
         {
             if (playerController != null)
             {
-                playerController.moveInput = _casting ? Vector2.zero : GameControls.DirectionalInput;
+                playerController.moveInput = (_casting || !_rod.ReeledIn) ? Vector2.zero : GameControls.DirectionalInput;
             }
 
-            if (GameControls.CastLine.IsPressed)
+            if (_rod.ReeledIn && _camera.target != playerController.transform)
+                _camera.target = playerController.transform;
+
+            if (GameControls.CastLine.IsPressed && _rod.ReeledIn)
             {
                 _casting = true;
                 
                 _castStartTime = Time.time;
                 castStrength = 0f;
                 _overshotCast = false;
-                _camera.SetTargetTransform(playerController.transform);
+                _camera.target = playerController.transform;
             }
             else if (GameControls.CastLine.IsHeld)
             {
@@ -68,8 +70,9 @@ namespace FishingGame.Development
 
                 float strength = Mathf.Max(castStrength * CAST_STRENGTH_MULTIPLIER * (isPerfectCast ? 1.25f : 1f), .707f);
                 Vector2 throwVector = new Vector2(playerController.FlipValue * strength, 5f);
-                _rod.ThrowLure(playerController.transform.position + new Vector3(0f, 1.5f), throwVector);
-                _camera.SetTargetTransform(_rod.Lure.transform);
+                _rod.ThrowLure(throwVector);
+                _camera.target = _rod.Lure.transform;
+                _casting = false;
             }
 
             if (_castStrengthImage != null)
